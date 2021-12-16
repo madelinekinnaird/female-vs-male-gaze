@@ -1,0 +1,44 @@
+## create table
+
+CREATE TABLE gaze_template
+(
+  id              INT unsigned NOT NULL AUTO_INCREMENT, # Unique ID for the record
+  ggt             VARCHAR(150) NOT NULL,
+  man1            INT NOT NULL,
+  man2            INT NOT NULL,
+  man3            INT NOT NULL,
+  man4            INT NOT NULL,
+  PRIMARY KEY     (id)                                  # Make the id the primary key
+);
+
+INSERT INTO gaze_template (ggt, man1, man2, man3, man4) VALUES
+  ('female', 100, 80, 10, 20),
+  ('male', 90, 25, 80, 60);
+
+CREATE TABLE gaze_database
+(
+  id              INT unsigned NOT NULL AUTO_INCREMENT, # Unique ID for the record
+  ggt             VARCHAR(150) NOT NULL,
+  man1            INT NOT NULL,
+  man2            INT NOT NULL,
+  man3            INT NOT NULL,
+  man4            INT NOT NULL,
+  man5            INT NOT NULL,
+  man6            INT NOT NULL,
+  man7            INT NOT NULL,
+  man8            INT NOT NULL,
+  man9            INT NOT NULL,
+  man10            INT NOT NULL,
+  man11            INT NOT NULL,
+  man12            INT NOT NULL,
+  man13            INT NOT NULL,
+  PRIMARY KEY     (id)                                  # Make the id the primary key
+);
+
+
+INSERT INTO gaze_database (ggt,man1,man2,man3,man4, man5, man6, man7, man8, man9,man10, man11, man12, man13) VALUES
+  ('female', 80, 40, 95, 65, 70, 50, 60, 70, 30, 60, 55, 55, 90);
+
+
+  INSERT INTO gaze_database (ggt,man1,man2,man3,man4, man5, man6, man7, man8, man9,man10, man11, man12, man13) VALUES
+    ('male', 30, 90, 40, 25, 70, 25, 50, 45, 85, 45, 80, 55, 85);
