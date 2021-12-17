@@ -14,8 +14,8 @@ import psycopg2
 #import mysql.connector
 
 def init_connection():
-#    return mysql.connector.connect(**st.secrets["mysql"])
-    return psycopg2.connect(host = "localhost",port = 5432,database = "gaze_database",user = "postgres", password = os.environ['PASSWORD_KEY'])
+    return mysql.connector.connect(host='127.0.0.1', user = "root", password = "Bdflmnptv1!", database = "gazes")
+    #return psycopg2.connect(host = "localhost",port = 5432,database = "gaze_database",user = "postgres", password = os.environ['PASSWORD_KEY'])
 
 conn = init_connection()
 

@@ -20,16 +20,19 @@
 import surveyView
 import resultsView
 import distributionView
+
+
+import pandas as pd
 import streamlit as st
 import numpy as np
-
 import os
 import psycopg2
-#import mysql.connector
+import mysql.connector
 
 def init_connection():
-#    return mysql.connector.connect(**st.secrets["mysql"])
-    return psycopg2.connect(host = "localhost",port = 5432,database = "gaze_database",user = "postgres", password = os.environ['PASSWORD_KEY'])
+    return mysql.connector.connect(host='127.0.0.1', user = "root", password = "Bdflmnptv1!", database = "gazes")
+    #return psycopg2.connect(host = "localhost",port = 5432,database = "gaze_database",user = "postgres", password = os.environ['PASSWORD_KEY'])
+
 
 conn = init_connection()
 
@@ -43,7 +46,7 @@ def insert_into_table(ggt,man1,man2,man3,man4,man5,man6,man7,man8,man9,man10,man
         conn = init_connection()
         cur = conn.cursor()
 
-        query = """INSERT INTO gaze_table (ggt,man1,man2,man3,man4, man5,man6,man7,man8,man9,man10,man11,man12,man13)
+        query = """INSERT INTO gaze_database (ggt,man1,man2,man3,man4, man5,man6,man7,man8,man9,man10,man11,man12,man13)
                                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) """
 
         row = (ggt,man1,man2,man3,man4, man5,man6,man7,man8,man9,man10,man11,man12,man13)
@@ -67,14 +70,8 @@ def jitter(start, end, num):
         res.append(np.random.randint(start, end))
     return res
 
-raw_code = '''SELECT count(*), AVG(man1) man1, AVG(man2) man2, AVG(man3) man3, AVG(man4) man4, AVG(man5) man5, AVG(man6) man6, AVG(man7) man7, AVG(man8) man8, AVG(man9) man9, AVG(man10) man10, AVG(man11) man11, AVG(man12) man12, AVG(man13) man13 FROM gaze_table GROUP BY ggt'''
+raw_code = '''SELECT count(*), AVG(man1) man1, AVG(man2) man2, AVG(man3) man3, AVG(man4) man4, AVG(man5) man5, AVG(man6) man6, AVG(man7) man7, AVG(man8) man8, AVG(man9) man9, AVG(man10) man10, AVG(man11) man11, AVG(man12) man12, AVG(man13) man13 FROM gaze_database GROUP BY ggt'''
 df = run_query(raw_code)
-
-
-
-
-
-
 
 
 ## potentially randomize order
@@ -128,6 +125,6 @@ if agree:
 
      selection = st.sidebar.radio("", list(PAGES.keys()))
      page = PAGES[selection]
-     page.app(df, rating1,rating2,rating3,rating4, rating5, rating6, rating7, rating8, rating9,rating10, rating11, rating12, rating13)
+     page.app(df, rating1,rating2,rating3,rating4,rating5,rating6,rating7,rating8,rating9,rating10,rating11,rating12,rating13)
 else:
-    surveyView.app(df, rating1,rating2,rating3,rating4, rating5, rating6, rating7, rating8, rating9,rating10, rating11, rating12, rating13)
+    surveyView.app(df, rating1,rating2,rating3,rating4,rating5,rating6,rating7,rating8,rating9,rating10,rating11,rating12,rating13)

@@ -9,13 +9,13 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 
-#import mysql.connector
+import mysql.connector
 import os
 import psycopg2
 
 def init_connection():
-#    return mysql.connector.connect(**st.secrets["mysql"])
-    return psycopg2.connect(host = "localhost",port = 5432,database = "gaze_database",user = "postgres", password = os.environ['PASSWORD_KEY'])
+   return mysql.connector.connect(host='127.0.0.1', user = "root", password = "Bdflmnptv1!", database = "gazes")
+    #return psycopg2.connect(host = "localhost",port = 5432,database = "gaze_database",user = "postgres", password = os.environ['PASSWORD_KEY'])
 
 conn = init_connection()
 
@@ -28,7 +28,7 @@ def run_query(query):
 
 
 def plot_distribution(col, man, rating, jitterpoints):
-    raw_code = '''SELECT {0}, ggt FROM gaze_table'''.format(col)
+    raw_code = '''SELECT {0}, ggt FROM gaze_database'''.format(col)
     df = pd.read_sql(raw_code, conn)
 
     test_image = 'images_original/' + man +'.png'
