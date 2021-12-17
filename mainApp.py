@@ -31,13 +31,9 @@ import mysql.connector
 
 
 def init_connection():
-    return mysql.connector.connect(host='us-cdbr-east-05.cleardb.net', user = "b0a17d470a43c4", password = "d84357e2", database = "heroku_6b9bc07d291168b")
+    return mysql.connector.connect(host='us-cdbr-east-05.cleardb.net', user = "b0a17d470a43c4", password = os.environ['PASSWORD_KEY']), database = "heroku_6b9bc07d291168b")
     #return psycopg2.connect(host = "localhost",port = 5432,database = "gaze_database",user = "postgres", password = os.environ['PASSWORD_KEY'])
-host = "localhost"
-port = 3306
-database = "gazes"
-user = "root"
-password = "Bdflmnptv1!"
+
 
 conn = init_connection()
 
@@ -51,7 +47,7 @@ def insert_into_table(ggt,man1,man2,man3,man4,man5,man6,man7,man8,man9,man10,man
         conn = init_connection()
         cur = conn.cursor()
 
-        query = """INSERT INTO gaze_database (ggt,man1,man2,man3,man4, man5,man6,man7,man8,man9,man10,man11,man12,man13)
+        query = """INSERT INTO gaze_table (ggt,man1,man2,man3,man4, man5,man6,man7,man8,man9,man10,man11,man12,man13)
                                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) """
 
         row = (ggt,man1,man2,man3,man4, man5,man6,man7,man8,man9,man10,man11,man12,man13)
@@ -75,7 +71,7 @@ def jitter(start, end, num):
         res.append(np.random.randint(start, end))
     return res
 
-raw_code = '''SELECT count(*), AVG(man1) man1, AVG(man2) man2, AVG(man3) man3, AVG(man4) man4, AVG(man5) man5, AVG(man6) man6, AVG(man7) man7, AVG(man8) man8, AVG(man9) man9, AVG(man10) man10, AVG(man11) man11, AVG(man12) man12, AVG(man13) man13 FROM gaze_database GROUP BY ggt'''
+raw_code = '''SELECT count(*), AVG(man1) man1, AVG(man2) man2, AVG(man3) man3, AVG(man4) man4, AVG(man5) man5, AVG(man6) man6, AVG(man7) man7, AVG(man8) man8, AVG(man9) man9, AVG(man10) man10, AVG(man11) man11, AVG(man12) man12, AVG(man13) man13 FROM gaze_table GROUP BY ggt'''
 df = run_query(raw_code)
 
 

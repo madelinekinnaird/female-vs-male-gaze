@@ -28,7 +28,7 @@ def run_query(query):
 
 
 def plot_distribution(col, man, rating, jitterpoints):
-    raw_code = '''SELECT {0}, ggt FROM gaze_database'''.format(col)
+    raw_code = '''SELECT {0}, ggt FROM gaze_table'''.format(col)
     df = pd.read_sql(raw_code, conn)
 
     test_image = 'images_original/' + man +'.png'
