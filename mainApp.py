@@ -64,21 +64,13 @@ def jitter(start, end, num):
 
 raw_code = '''SELECT count(*), AVG(man1) man1, AVG(man2) man2, AVG(man3) man3, AVG(man4) man4, AVG(man5) man5, AVG(man6) man6, AVG(man7) man7, AVG(man8) man8, AVG(man9) man9, AVG(man10) man10, AVG(man11) man11, AVG(man12) man12, AVG(man13) man13 FROM gaze_database GROUP BY ggt'''
 df = run_query(raw_code)
-#st.markdown(
-#    """
-#<style>
-
-#[class^="st-b"]  {
-#    color: #31333F;
-#    font-family: monospace;
-#}
 
 
 
-#</style>
-#""",
-#    unsafe_allow_html=True,
-#)
+
+
+
+
 
 ## potentially randomize order
 
@@ -94,9 +86,9 @@ ggt = 'female' if ggtReponse == 'girl/gay/they' else 'male'
 
 st.sidebar.write("How attractive do you personally find:")
 
-rating1 = st.sidebar.slider('Adam Driver?', 0, 100, 44)
-rating2 = st.sidebar.slider('Ryan Reynolds?', 0, 100, 45)
-rating3 = st.sidebar.slider('Dev Patel?', 0, 100, 46)
+rating1 = st.sidebar.slider('Adam Driver', 0, 100, 44)
+rating2 = st.sidebar.slider('Ryan Reynolds', 0, 100, 45)
+rating3 = st.sidebar.slider('Dev Patel', 0, 100, 46)
 rating4 = st.sidebar.slider('Pete Davidson', 0, 100, 47)
 rating5 = st.sidebar.slider('Robert Pattinson', 0, 100, 48)
 rating6 = st.sidebar.slider('Michael Cera', 0, 100, 49)
