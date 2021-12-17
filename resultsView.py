@@ -11,7 +11,7 @@ import os
 import psycopg2
 
 
-#import mysql.connector
+import mysql.connector
 
 def init_connection():
     return mysql.connector.connect(host='127.0.0.1', user = "root", password = "Bdflmnptv1!", database = "gazes")
