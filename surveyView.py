@@ -1,4 +1,4 @@
-from collections import namedtuple
+#from collections import namedtuple
 import math
 import pandas as pd
 import streamlit as st
@@ -7,8 +7,6 @@ import numpy as np
 ## pull from spreadsheet to plot overall view
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
-
-
 
 
 def app(df, rating1,rating2,rating3,rating4, rating5, rating6, rating7, rating8, rating9,rating10, rating11, rating12, rating13):

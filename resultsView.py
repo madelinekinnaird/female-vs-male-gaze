@@ -8,10 +8,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 
-import mysql.connector
+import psycopg2
+
+
+#import mysql.connector
 
 def init_connection():
-    return mysql.connector.connect(**st.secrets["mysql"])
+#    return mysql.connector.connect(**st.secrets["mysql"])
+    return psycopg2.connect(**st.secrets["postgres"])
 
 conn = init_connection()
 
