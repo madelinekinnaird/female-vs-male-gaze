@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 
 #import mysql.connector
-
+import os
 import psycopg2
 
 def init_connection():

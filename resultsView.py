@@ -7,7 +7,7 @@ import numpy as np
 ## pull from spreadsheet to plot overall view
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
-
+import os
 import psycopg2
 
 
