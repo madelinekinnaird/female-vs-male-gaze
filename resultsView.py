@@ -13,32 +13,30 @@ import psycopg2
 
 import mysql.connector
 
-def init_connection():
-    return mysql.connector.connect(host='us-cdbr-east-05.cleardb.net', user = "b0a17d470a43c4", password = os.environ['PASSWORD_KEY'], database = "heroku_6b9bc07d291168b")
+#def init_connection():
+#    return mysql.connector.connect(host='us-cdbr-east-05.cleardb.net', user = "b0a17d470a43c4", password = os.environ['PASSWORD_KEY'], database = "heroku_6b9bc07d291168b")
     #return psycopg2.connect(host = "localhost",port = 5432,database = "gaze_database",user = "postgres", password = os.environ['PASSWORD_KEY'])
 
-conn = init_connection()
+#conn = init_connection()
 
 
-def run_query(query):
-    with conn.cursor() as cur:
-        cur.execute(query)
-        return cur.fetchall()
+#def run_query(query):
+#    with conn.cursor() as cur:
+#        cur.execute(query)
+#        return cur.fetchall()
 
-def stretch_to_graph(sqlQuery,axis):
-    array = [float(int(val)) for val in  list(sqlQuery[axis][1:])]
-    #multiplier = float(1000/(max(queryList) - min(queryList)))
-    #array = np.asarray(queryList)*multiplier
-    #array = [val - 50.0 for val in queryList]
-
-    return array
+#def stretch_to_graph(sqlQuery,axis):
+#    array = [float(int(val)) for val in  list(sqlQuery[axis][1:])]
+#    return array
 
 def getImage(path):
      return OffsetImage(plt.imread(path))
 
 def app(df, rating1,rating2,rating3,rating4,rating5,rating6,rating7,rating8,rating9,rating10,rating11,rating12,rating13):
-
-    st.write("This plot shows the average response from", df[0][0],"girls/gays/theys (represented on the 'female gaze' axis) and from", df[1][0], "people who listed 'other' (represented on the 'male gaze axis).")
+    femaleNum = len(df[df['ggt'] == 'female'])
+    maleNum = len(df[df['ggt'] == 'male'])
+    ## old sql query logic df[1][0]
+    st.write("This plot shows the average response from", femaleNum,"girls/gays/theys (represented on the 'female gaze' axis) and from", maleNum, "people who listed 'other' (represented on the 'male gaze axis).")
     ## add title directly with grpah, relative average response
     paths = [
     'images/adam_driver.png',
@@ -55,11 +53,13 @@ def app(df, rating1,rating2,rating3,rating4,rating5,rating6,rating7,rating8,rati
     'images/timothee_chalamet.png',
     'images/michael_b_jordan.png']
 
-    #raw_code = '''SELECT count(*), AVG(man1) man1, AVG(man2) man2, AVG(man3) man3, AVG(man4) man4, AVG(man5) man5, AVG(man6) man6, AVG(man7) man7, AVG(man8) man8, AVG(man9) man9, AVG(man10) man10, AVG(man11) man11, AVG(man12) man12, AVG(man13) man13 FROM gaze_database GROUP BY ggt'''
-    #df = run_query(raw_code)
+
     # logic to map points to graph
-    y = stretch_to_graph(df,1)
-    x = stretch_to_graph(df,0)
+    #y = stretch_to_graph(df,1)
+    #x = stretch_to_graph(df,0)
+
+    x = list(df[df['ggt'] == 'female'].drop(['Unnamed: 0'],axis=1).mean())
+    y = list(df[df['ggt'] == 'male'].drop(['Unnamed: 0'],axis=1).mean())
 
 
     fig, ax = plt.subplots(figsize = (10,9))

@@ -30,57 +30,48 @@ import psycopg2
 import mysql.connector
 
 
-def init_connection():
-    return mysql.connector.connect(host='us-cdbr-east-05.cleardb.net', user = "b0a17d470a43c4", password = os.environ['PASSWORD_KEY'], database = "heroku_6b9bc07d291168b")
-    #return psycopg2.connect(host = "localhost",port = 5432,database = "gaze_database",user = "postgres", password = os.environ['PASSWORD_KEY'])
+#def init_connection():
+#    return mysql.connector.connect(host='us-cdbr-east-05.cleardb.net', user = "b0a17d470a43c4", password = os.environ['PASSWORD_KEY'], database = "heroku_6b9bc07d291168b")
 
+#conn = init_connection()
 
-conn = init_connection()
+#def run_query(query):
+#    with conn.cursor() as cur:
+#        cur.execute(query)
+#        return cur.fetchall()
 
-def run_query(query):
-    with conn.cursor() as cur:
-        cur.execute(query)
-        return cur.fetchall()
+#def insert_into_table(ggt,man1,man2,man3,man4,man5,man6,man7,man8,man9,man10,man11,man12,man13):
+#    try:
+#        conn = init_connection()
+#        cur = conn.cursor()
+#        query = """INSERT INTO gaze_table (ggt,man1,man2,man3,man4, man5,man6,man7,man8,man9,man10,man11,man12,man13)
+#                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) """
 
-def insert_into_table(ggt,man1,man2,man3,man4,man5,man6,man7,man8,man9,man10,man11,man12,man13):
-    try:
-        conn = init_connection()
-        cur = conn.cursor()
-
-        query = """INSERT INTO gaze_table (ggt,man1,man2,man3,man4, man5,man6,man7,man8,man9,man10,man11,man12,man13)
-                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) """
-
-        row = (ggt,man1,man2,man3,man4, man5,man6,man7,man8,man9,man10,man11,man12,man13)
-        cur.execute(query, row)
-        conn.commit()
-        print("Record inserted successfully into table")
+#        row = (ggt,man1,man2,man3,man4, man5,man6,man7,man8,man9,man10,man11,man12,man13)
+#        cur.execute(query, row)
+#        conn.commit()
+#        print("Record inserted successfully into table")
 
     #except mysql.connector.Error as error:
     #    print("Failed to insert into MySQL table {}".format(error))
 
-    finally:
-        if conn.is_connected():
-            cur.close()
-            conn.close()
-            print("MySQL connection is closed")
+#    finally:
+#        if conn.is_connected():
+#            cur.close()
+#            conn.close()
+#            print("MySQL connection is closed")
 
 
-def jitter(start, end, num):
-    res = []
-    for j in range(num):
-        res.append(np.random.randint(start, end))
-    return res
-
-raw_code = '''SELECT count(*), AVG(man1) man1, AVG(man2) man2, AVG(man3) man3, AVG(man4) man4, AVG(man5) man5, AVG(man6) man6, AVG(man7) man7, AVG(man8) man8, AVG(man9) man9, AVG(man10) man10, AVG(man11) man11, AVG(man12) man12, AVG(man13) man13 FROM gaze_table GROUP BY ggt'''
-df = run_query(raw_code)
-
+#raw_code = '''SELECT count(*), AVG(man1) man1, AVG(man2) man2, AVG(man3) man3, AVG(man4) man4, AVG(man5) man5, AVG(man6) man6, AVG(man7) man7, AVG(man8) man8, AVG(man9) man9, AVG(man10) man10, AVG(man11) man11, AVG(man12) man12, AVG(man13) man13 FROM gaze_table GROUP BY ggt'''
+#df = run_query(raw_code)
+df = pd.read_csv('testratings.csv')
 
 ## potentially randomize order
 
 #st.sidebar.image('images/start here.png')
 """
 # Male vs. Female Gaze
-Brief description of project blah blah blah.
+Quantifying the difference in the gazes. Read more [here](https://github.com/madelinekinnaird/female-vs-male-gaze).
 """
 st.sidebar.title('Survey')
 
@@ -104,7 +95,7 @@ rating12 = st.sidebar.slider('Timothee Chalamet', 0, 100, 55)
 rating13 = st.sidebar.slider('Michael B. Jordan', 0, 100, 56)
 
 
-st.sidebar.title("Submit responses to project's database ✨for science ✨")
+st.sidebar.title("I consent to submitting my responses to this project's database for this important ✨scientific research✨")
 agree = st.sidebar.checkbox('Submit')
 
 

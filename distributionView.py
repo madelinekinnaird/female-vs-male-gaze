@@ -11,25 +11,26 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 
 import mysql.connector
 import os
-import psycopg2
 
-def init_connection():
-   return mysql.connector.connect(host='us-cdbr-east-05.cleardb.net', user = "b0a17d470a43c4", password = os.environ['PASSWORD_KEY'], database = "heroku_6b9bc07d291168b")
+
+#def init_connection():
+#   return mysql.connector.connect(host='us-cdbr-east-05.cleardb.net', user = "b0a17d470a43c4", password = os.environ['PASSWORD_KEY'], database = "heroku_6b9bc07d291168b")
     #return psycopg2.connect(host = "localhost",port = 5432,database = "gaze_database",user = "postgres", password = os.environ['PASSWORD_KEY'])
 
-conn = init_connection()
+#conn = init_connection()
 
-def run_query(query):
+#def run_query(query):
 
-    with conn.cursor() as cur:
-        cur.execute(query)
-        return cur.fetchall()
+#    with conn.cursor() as cur:
+#        cur.execute(query)
+#        return cur.fetchall()
 
 
 
 def plot_distribution(col, man, rating, jitterpoints):
-    raw_code = '''SELECT {0}, ggt FROM gaze_table'''.format(col)
-    df = pd.read_sql(raw_code, conn)
+    #raw_code = '''SELECT {0}, ggt FROM gaze_table'''.format(col)
+    #df = pd.read_sql(raw_code, conn)
+    df = pd.read_csv('testratings.csv')
 
     test_image = 'images_original/' + man +'.png'
     # plot it
@@ -82,6 +83,9 @@ def plot_distribution(col, man, rating, jitterpoints):
 def app(df, rating1,rating2,rating3,rating4,rating5,rating6,rating7,rating8,rating9,rating10,rating11,rating12,rating13):
     import matplotlib.pyplot as plt
     import numpy as np
+
+    st.write("See how your responses compare across the two identify distributions!")
+    ## add title directly with grpah, relative average response
 
     my_file = open("jitterpoints.txt", "r")
     content = my_file.read()
