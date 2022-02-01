@@ -42,3 +42,34 @@ INSERT INTO gaze_database (ggt,man1,man2,man3,man4, man5, man6, man7, man8, man9
 
   INSERT INTO gaze_database (ggt,man1,man2,man3,man4, man5, man6, man7, man8, man9,man10, man11, man12, man13) VALUES
     ('male', 30, 90, 40, 25, 70, 25, 50, 45, 85, 45, 80, 55, 85);
+
+
+
+POST GRES
+
+CREATE TABLE gaze_table (
+    id            SERIAL PRIMARY KEY,
+    ggt           VARCHAR NOT NULL,
+    man1          int,
+    man2          int,
+    man3          int,
+    man4          int,
+    man5          int,
+    man6          int,
+    man7          int,
+    man8          int,
+    man9          int,
+    man10         int,
+    man11         int,
+    man12         int,
+    man13         int
+
+);
+
+
+INSERT INTO gaze_table(ggt,man1,man2,man3,man4, man5, man6, man7, man8, man9,man10, man11, man12, man13)
+VALUES ('female', 80, 40, 95, 65, 70, 50, 60, 70, 30, 60, 55, 55, 90);
+
+
+INSERT INTO gaze_table(ggt,man1,man2,man3,man4, man5, man6, man7, man8, man9,man10, man11, man12, man13)
+VALUES ('male', 30, 90, 40, 25, 70, 25, 50, 45, 85, 45, 80, 55, 85);

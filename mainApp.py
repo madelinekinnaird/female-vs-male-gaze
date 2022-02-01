@@ -17,6 +17,9 @@
 
 ## https://stackoverflow.com/questions/8671808/matplotlib-avoiding-overlapping-datapoints-in-a-scatter-dot-beeswarm-plot
 
+## caching
+#https://towardsdatascience.com/streamlit-101-an-in-depth-introduction-fc8aad9492f2
+
 import surveyView
 import resultsView
 import distributionView
@@ -71,7 +74,7 @@ df = pd.read_csv('testratings.csv')
 #st.sidebar.image('images/start here.png')
 """
 # Male vs. Female Gaze
-Quantifying the difference in the gazes. Read more [here](https://github.com/madelinekinnaird/female-vs-male-gaze).
+Quantifying the difference in the gazes. Read more [here](https://github.com/madelinekinnaird/female-vs-male-gaze/blob/main/project_description/project_explanation.md).
 """
 st.sidebar.title('Survey')
 
