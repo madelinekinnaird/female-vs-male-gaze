@@ -23,13 +23,20 @@
 import surveyView
 import resultsView
 import distributionView
-
+ #https://docs.streamlit.io/knowledge-base/tutorials/databases/mysql
 
 import pandas as pd
 import streamlit as st
 import numpy as np
 import os
 import mysql.connector
+
+
+# Initialize connection.
+# Uses st.cache to only run once.
+@st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
+def init_connection():
+    return mysql.connector.connect(**st.secrets["mysql"])
 
 
 #def init_connection():
