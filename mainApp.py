@@ -36,8 +36,22 @@ import mysql.connector
 # Uses st.cache to only run once.
 @st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
 def init_connection():
-    return mysql.connector.connect(st.secrets["mysql"]["host"])
+    return mysql.connector.connect(**st.secrets["mysql"])
 
+conn = init_connection()
+
+
+@st.cache(ttl=600)
+def run_query(query):
+    with conn.cursor() as cur:
+        cur.execute(query)
+        return cur.fetchall()
+
+rows = run_query("SELECT * from mytable;")
+
+# Print results.
+for row in rows:
+    st.write(f"{row[0]} has a :{row[1]}:")
 
 #def init_connection():
 #    return mysql.connector.connect(host='us-cdbr-east-05.cleardb.net', user = "b0a17d470a43c4", password = os.environ['PASSWORD_KEY'], database = "heroku_6b9bc07d291168b")
